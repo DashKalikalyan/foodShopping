@@ -1,6 +1,8 @@
 .Toolbar {
     height: 56px;
     width: 100%;
+    padding:10px;
+    color: white;
     position: fixed;
     top:0;
     left:0;
@@ -10,6 +12,10 @@
     align-items: center;
     box-sizing: border-box;
     z-index: 90;
-    color: #222222;
     font-weight: bold;
+}
+
+.Toolbar a {
+    color: white;
+    text-decoration: none;
 }
