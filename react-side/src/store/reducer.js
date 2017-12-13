@@ -7,7 +7,16 @@ const initialState= {
         cheese:0,
         meat:0
     },
-    totalPrice: 4
+    totalPrice: 4,
+    // orderForm: {
+    //     name:'',
+    //     street:'',
+    //     zipCode:'',
+    //     country:'',
+    //     email:'kkd@gmail.com',
+    //     deliveryMethod:'fastest'
+    // },
+    orders:[]
 };
 
 const INGREDIENT_PRICE = {
@@ -20,14 +29,6 @@ const INGREDIENT_PRICE = {
 const reducer= (state=initialState, action) => {
     switch (action.type) {
         case actiontypes.ADD_INGREDIENT:
-            // let updatedCount= state.ingredients[action.ingredientName]+1;
-            // updatedIngredient={...state.ingredients};
-            // updatedIngredient[action.ingredientName]=updatedCount;
-            // let newPrice=state.totalPrice+INGREDIENT_PRICE[action.ingredientName];
-            // return {
-            //     ingredients: updatedIngredient,
-            //     totalPrice:newPrice
-            // };
             return {
                 ...state,
                 ingredients: {
@@ -44,6 +45,28 @@ const reducer= (state=initialState, action) => {
                     [action.ingredientName]:state.ingredients[action.ingredientName]-1
                 },
                 totalPrice:state.totalPrice - INGREDIENT_PRICE[action.ingredientName]
+            };
+        case actiontypes.SET_INGREDIENTS:
+            return {
+                ...state,
+                ingredients:{
+                    salad:action.ingredients.salad,
+                    bacon:action.ingredients.bacon,
+                    cheese:action.ingredients.cheese,
+                    meat:action.ingredients.meat
+                }
+            };
+        // case actiontypes.SET_CONTACTDATA:
+        //     return {
+        //         ...state,
+        //         orderForm:action.orderForm
+        //     };
+        case actiontypes.SAVE_ORDER:
+            console.log(action.order);
+            console.log(state);
+            return {
+                ...state,
+                orders:state.orders.concat(action.order)
             };
         default:
             return state;

@@ -5,7 +5,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummery from '../../components/Burger/OrderSummery/OrderSummery';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import * as actiontypes from '../../store/actions';
+import * as actionCreators from '../../store/actions';
 
 class BurgerBuilder extends Component {
     state = {
@@ -20,11 +20,11 @@ class BurgerBuilder extends Component {
     };
 
     componentDidMount() {
-        // axios.get('https://burger-bf2a6.firebaseio.com/ingredient.json')
-        //     .then((response)=>{
-        //         console.log(response);
-        //         this.setState({ingredients:response.data});
-        //     });
+        axios.get('https://burger-bf2a6.firebaseio.com/ingredients.json')
+            .then((response)=>{
+                console.log(response);
+                this.props.onSetIngredients(response.data);
+            });
     }
 
     purchaseHandler = () => {
@@ -91,13 +91,15 @@ const mapStateToProps= (state) => {
     return {
         ings: state.ingredients,
         totalPrice:state.totalPrice
-    }
+    };
 };
+
 const mapDispatchToProps= (dispatch) => {
     return {
-        onIngredientAdded: (ingredientName) => dispatch({type: actiontypes.ADD_INGREDIENT, ingredientName: ingredientName},),
-        onIngredientRemoved: (ingredientName) => dispatch({type: actiontypes.REMOVE_INGREDIENT, ingredientName: ingredientName},),
-    }
+        onIngredientAdded: (ingredientName) => dispatch(actionCreators.addIngredient(ingredientName)),
+        onIngredientRemoved: (ingredientName) => dispatch(actionCreators.removeIngredient(ingredientName)),
+        onSetIngredients: (ingredients) => dispatch(actionCreators.setIngredients(ingredients))
+    };
 };
 
 

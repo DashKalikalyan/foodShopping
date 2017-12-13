@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import * as actionCreators from "../../store/actions";
+
 
 class ContactData extends Component {
     state = {
         orderForm: {
-            // name:'kkd',
-            // street:'190 Ryland St',
-            // zipCode:95110,
-            // country:'US',
-            // email:'kkd@gmail.com',
-            // deliveryMethod:'fastest'
+            name:'',
+            street:'',
+            zipCode:'',
+            country:'',
+            email:'kkd@gmail.com',
+            deliveryMethod:'fastest'
         }
     };
 
@@ -22,7 +24,7 @@ class ContactData extends Component {
         const post = {
             ingredients: this.props.ings,
             price: this.props.totalPrice,
-            orderData: formdata
+            orderData: this.state.orderForm
         };
 
         console.log(post);
@@ -30,17 +32,21 @@ class ContactData extends Component {
         axios.post('https://burger-bf2a6.firebaseio.com/orders.json', post)
             .then((response) => {
                 console.log(response);
+                let order={...post, orderId: response.data.name};
+                this.props.onSaveOrder(order);
+                this.props.history.push({
+                    pathname:'/'
+                });
+
             });
     };
-
-    inputChangedHandler = (event) => {
+    onInputChanged = (event) => {
         const value = event.target.value;
         const name = event.target.name;
 
         console.log(name, value);
 
         let updatedOrderForm = {...this.state.orderForm, [name]: value};
-
         this.setState({
             orderForm: updatedOrderForm
         }, ()=> {
@@ -67,7 +73,7 @@ class ContactData extends Component {
                                     placeholder="Your Name"
                                     required
                                     value={this.state.orderForm.name}
-                                    onChange={this.inputChangedHandler}/>
+                                    onChange={this.onInputChanged}/>
                             </div>
 
                             <br/>
@@ -82,7 +88,7 @@ class ContactData extends Component {
                                     placeholder="Street"
                                     required
                                     value={this.state.orderForm.street}
-                                    onChange={this.inputChangedHandler}/>
+                                    onChange={this.onInputChanged}/>
                             </div>
 
                             <br/>
@@ -90,14 +96,14 @@ class ContactData extends Component {
                             <div className="form-group">
                                 <label htmlFor="zipCode">Zip Code</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     id="zipCode"
                                     name="zipCode"
                                     className="form-control"
                                     placeholder="Zip Code"
                                     required
                                     value={this.state.orderForm.zipCode}
-                                    onChange={this.inputChangedHandler}/>
+                                    onChange={this.onInputChanged}/>
                             </div>
 
                             <br/>
@@ -112,7 +118,7 @@ class ContactData extends Component {
                                     placeholder="Country"
                                     required
                                     value={this.state.orderForm.country}
-                                    onChange={this.inputChangedHandler}/>
+                                    onChange={this.onInputChanged}/>
                             </div>
 
                             <div className="form-group">
@@ -125,7 +131,7 @@ class ContactData extends Component {
                                     placeholder="Email id"
                                     required
                                     value={this.state.orderForm.email}
-                                    onChange={this.inputChangedHandler}/>
+                                    onChange={this.onInputChanged}/>
                             </div>
 
                             <br/>
@@ -139,7 +145,7 @@ class ContactData extends Component {
                                     required
                                     name="deliveryMethod"
                                     value={this.state.orderForm.deliveryMethod}
-                                    onChange={this.inputChangedHandler}>
+                                    onChange={this.onInputChanged}>
                                       <option value="fastest">fastest</option>
                                       <option value="regular">regular</option>
                                       <option value="slow">not in a hurry</option>
@@ -152,6 +158,7 @@ class ContactData extends Component {
                 <div style={{paddingLeft:'10px'}}>
                     <button className="btn btn-primary" onClick={this.orderHandler}>Order Now</button>
                 </div>
+                <p>{this.props.orderId}</p>
             </div>
         );
     }
@@ -160,9 +167,15 @@ class ContactData extends Component {
 const mapStateToProps= (state) => {
     return {
         ings: state.ingredients,
-        totalPrice:state.totalPrice
+        totalPrice:state.totalPrice,
+        orderForm:state.orderForm,
+        orderId:state.orderId
     }
 };
 
-
-export default connect(mapStateToProps) (ContactData);
+const mapDispatchToProps= (dispatch) => {
+    return {
+        onSaveOrder: (order) => dispatch(actionCreators.saveOrder(order))
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps) (ContactData);
