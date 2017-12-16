@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import * as actionCreators from "../../store/actions";
 
 
 class ContactData extends Component {
@@ -32,14 +31,15 @@ class ContactData extends Component {
         axios.post('https://burger-bf2a6.firebaseio.com/orders.json', post)
             .then((response) => {
                 console.log(response);
-                let order={...post, orderId: response.data.name};
-                this.props.onSaveOrder(order);
+                // let order={...post, orderId: response.data.name};
+                // this.props.onSaveOrder(order);
                 this.props.history.push({
                     pathname:'/'
                 });
 
             });
     };
+
     onInputChanged = (event) => {
         const value = event.target.value;
         const name = event.target.name;
@@ -167,15 +167,8 @@ class ContactData extends Component {
 const mapStateToProps= (state) => {
     return {
         ings: state.ingredients,
-        totalPrice:state.totalPrice,
-        orderForm:state.orderForm,
-        orderId:state.orderId
+        totalPrice:state.totalPrice
     }
 };
 
-const mapDispatchToProps= (dispatch) => {
-    return {
-        onSaveOrder: (order) => dispatch(actionCreators.saveOrder(order))
-    };
-};
-export default connect(mapStateToProps, mapDispatchToProps) (ContactData);
+export default connect(mapStateToProps) (ContactData);

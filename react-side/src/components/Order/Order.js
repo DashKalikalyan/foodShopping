@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Order.css';
+import Burger from '../Burger/Burger';
 
 const order = (props) => {
     const ingredients = [];
@@ -15,9 +16,18 @@ const order = (props) => {
     });
     return(
 
-        <div className={classes.Order} >
-            <p style={{textDecoration:'none'}}>Ingredients: {ingredientOutput}</p>
-            <p style={{textDecoration:'none'}}>Price: <strong>{props.price}</strong></p>
+        <div  className="col-lg-4">
+                {/*<p style={{textDecoration:'none'}}>Ingredients: {ingredientOutput}</p>*/}
+                {/*<p style={{textDecoration:'none'}}>Price: <strong>{props.price}</strong></p>*/}
+
+                <Burger
+                    ingredients={props.ingredients}/>
+
+                <div>
+                    <div style={{padding:'10px'}}><button className="btn btn-success" onClick={props.onViewOrder}>VIEW ORDER</button>
+                        <button className="btn btn-danger pull-right" onClick={props.onDelete}>CANCEL ORDER</button>
+                    </div>
+                </div>
         </div>
 
     );

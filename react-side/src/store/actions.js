@@ -2,7 +2,7 @@ export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT';
 export const SET_INGREDIENTS = 'SET_INGREDIENTS';
 // export const SET_CONTACTDATA= 'SET_CONTACTDATA';
-export const SAVE_ORDER= 'SAVE_ORDER';
+export const GET_ORDERS= 'GET_ORDERS';
 
 export const addIngredient= (ingredientName)=> {
     return {
@@ -31,9 +31,9 @@ export const setIngredients= (ingredients)=> {
 //     };
 // };
 
-export const saveOrder= (order) => {
+export const getOrders= (orders) => {
     return {
-        type:SAVE_ORDER,
-        order:order
+        type:GET_ORDERS,
+        orders:orders
     };
 };

@@ -61,12 +61,12 @@ const reducer= (state=initialState, action) => {
         //         ...state,
         //         orderForm:action.orderForm
         //     };
-        case actiontypes.SAVE_ORDER:
-            console.log(action.order);
+        case actiontypes.GET_ORDERS:
+            console.log(action.orders);
             console.log(state);
             return {
                 ...state,
-                orders:state.orders.concat(action.order)
+                orders:action.orders
             };
         default:
             return state;
