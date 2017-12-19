@@ -50,8 +50,11 @@ const OrderSchema=new Schema({
         meat:{
             type:Number
         }
+    },
+    _creator: {
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
     }
-
     });
 
 const Order = mongoose.model('Order', OrderSchema);

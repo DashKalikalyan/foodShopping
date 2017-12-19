@@ -1,5 +1,6 @@
 const {Order}=require('../models/order');
 
+
 const addOrder=(req,res) => {
     console.log(req.body);
     let order = new Order({
@@ -16,7 +17,8 @@ const addOrder=(req,res) => {
             bacon:req.body.ingredients.bacon,
             cheese:req.body.ingredients.cheese,
             meat:req.body.ingredients.meat
-        }
+        },
+        _creator: req.user._id
     });
     order.save().then((doc) => {
         res.send(doc);

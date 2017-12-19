@@ -20,7 +20,7 @@ app.use('/',(req,res,next) => {
 app.post('/order',authenticate,addOrder);
 app.get('/orders',authenticate,getOrders);
 app.get('/order-details/:id',authenticate,getOrderDetails);
-app.get('/login',authenticate,login);
-app.get('/signup',authenticate,signup);
+app.post('/login',login);
+app.post('/signup',signup);
 
 app.listen(3001);
