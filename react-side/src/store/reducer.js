@@ -8,15 +8,8 @@ const initialState= {
         meat:0
     },
     totalPrice: 4,
-    // orderForm: {
-    //     name:'',
-    //     street:'',
-    //     zipCode:'',
-    //     country:'',
-    //     email:'kkd@gmail.com',
-    //     deliveryMethod:'fastest'
-    // },
-    orders:[]
+    orders:[],
+    token:''
 };
 
 const INGREDIENT_PRICE = {
@@ -67,6 +60,12 @@ const reducer= (state=initialState, action) => {
             return {
                 ...state,
                 orders:action.orders
+            };
+        case actiontypes.SAVE_TOKEN:
+            console.log(action.token);
+            return {
+                ...state,
+                token:action.token
             };
         default:
             return state;

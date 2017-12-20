@@ -12,7 +12,8 @@ class Orders extends Component {
 
 
     componentDidMount() {
-        axios.get('https://burger-bf2a6.firebaseio.com/orders.json')
+        console.log('componentDidmount Orders');
+        axios.get('http://localhost:3001/orders',{headers:{'x-auth': this.props.token}})
             .then((response) => {
                 console.log(response.data);
                 let orders=[];
@@ -73,7 +74,8 @@ class Orders extends Component {
 
 const mapStateToProps= (state) => {
     return {
-        orders:state.orders
+        orders:state.orders,
+        token:state.token
     };
 };
 

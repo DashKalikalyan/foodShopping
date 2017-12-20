@@ -7,9 +7,20 @@ const {login}=require('./routes/login');
 const {signup}=require('./routes/signup');
 const {authenticate}=require('./middlewares/authenticate');
 const {addOrder}=require('./routes/addOrder');
+const {deleteOrder}=require('./routes/deleteOrder');
+const {updateOrder}=require('./routes/updateOrder');
 
 
 const app=express();
+
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept, x-auth');
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+    next();
+});
+
 app.use(bodyParser.json());
 
 app.use('/',(req,res,next) => {
@@ -20,6 +31,8 @@ app.use('/',(req,res,next) => {
 app.post('/order',authenticate,addOrder);
 app.get('/orders',authenticate,getOrders);
 app.get('/order-details/:id',authenticate,getOrderDetails);
+app.delete('/order/:id',authenticate,deleteOrder);
+app.put('/order/:id',authenticate,updateOrder);
 app.post('/login',login);
 app.post('/signup',signup);
 

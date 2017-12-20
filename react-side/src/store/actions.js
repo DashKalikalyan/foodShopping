@@ -3,6 +3,7 @@ export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT';
 export const SET_INGREDIENTS = 'SET_INGREDIENTS';
 // export const SET_CONTACTDATA= 'SET_CONTACTDATA';
 export const GET_ORDERS= 'GET_ORDERS';
+export const SAVE_TOKEN= 'SAVE_TOKEN';
 
 export const addIngredient= (ingredientName)=> {
     return {
@@ -35,5 +36,12 @@ export const getOrders= (orders) => {
     return {
         type:GET_ORDERS,
         orders:orders
+    };
+};
+
+export const saveToken= (token) => {
+    return {
+        type:SAVE_TOKEN,
+        token:token
     };
 };
