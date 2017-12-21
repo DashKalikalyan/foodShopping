@@ -24,8 +24,10 @@ const order = (props) => {
                     ingredients={props.ingredients}/>
 
                 <div>
-                    <div style={{padding:'10px'}}><button className="btn btn-success" onClick={props.onViewOrder}>VIEW ORDER</button>
-                        <button className="btn btn-danger pull-right" onClick={props.onDelete}>CANCEL ORDER</button>
+                    <div style={{padding:'10px'}} className={classes.Flex}>
+                        <button className={classes.Button} onClick={props.onViewOrder}>VIEW</button>
+                        <button className={classes.Button} onClick={props.onUpdateOrder} style={{marginLeft:'40px'}}>UPDATE</button>
+                        <button className={classes.Button} onClick={props.onDelete} style={{marginLeft:'40px'}}>CANCEL</button>
                     </div>
                 </div>
         </div>

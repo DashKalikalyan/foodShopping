@@ -27,10 +27,12 @@ class Orders extends Component {
     }
 
     onDelete=(id) => {
-        axios.delete('https://burger-bf2a6.firebaseio.com/orders/'+id+'.json')
+        console.log(id);
+        axios.delete('http://localhost:3001/order/'+id,
+            {headers:{'x-auth': this.props.token}})
             .then((response) => {
                 console.log(response);
-                axios.get('https://burger-bf2a6.firebaseio.com/orders.json')
+                axios.get('http://localhost:3001/orders',{headers:{'x-auth': this.props.token}})
                     .then((response) => {
                         console.log(response.data);
                         let orders=[];
@@ -50,6 +52,12 @@ class Orders extends Component {
             });
     };
 
+    onUpdateOrder=(id)=>{
+        this.props.history.push({
+            pathname:'/order/'+id+'/edit'
+        });
+    };
+
 
     render() {
         return(
@@ -61,10 +69,10 @@ class Orders extends Component {
                                 ingredients={order.ingredients}
                                 orderData={order.orderData}
                                 price={order.price}
-                                key={order.id}
-                                onDelete={this.onDelete.bind(this,order.id)}
-                                onViewOrder={this.onViewOrder.bind(this,order.id)}/>
-
+                                key={order._id}
+                                onDelete={this.onDelete.bind(this,order._id)}
+                                onViewOrder={this.onViewOrder.bind(this,order._id)}
+                                onUpdateOrder={this.onUpdateOrder.bind(this,order._id)}/>
                     );
                 })}
             </div>

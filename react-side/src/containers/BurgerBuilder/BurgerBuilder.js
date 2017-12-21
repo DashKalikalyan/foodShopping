@@ -20,11 +20,38 @@ class BurgerBuilder extends Component {
     };
 
     componentDidMount() {
-        axios.get('https://burger-bf2a6.firebaseio.com/ingredients.json')
-            .then((response)=>{
-                console.log(response);
-                this.props.onSetIngredients(response.data);
-            });
+        if(this.props.match.params.id){
+            console.log(this.props.match);
+            console.log('in update');
+            let i;
+            let ingredients;
+            for (i in this.props.orders){
+                if (this.props.orders[i]._id===this.props.match.params.id){
+                     ingredients={
+                        salad:this.props.orders[i].ingredients.salad,
+                        bacon:this.props.orders[i].ingredients.bacon,
+                        cheese:this.props.orders[i].ingredients.cheese,
+                        meat:this.props.orders[i].ingredients.meat
+                    };
+                }
+            }
+            this.props.onSetIngredients(ingredients);
+
+        } else {
+            console.log(this.props.match);
+            axios.get('http://localhost:3001/ingredients')
+                .then((response)=>{
+                    console.log('in burgerbuilder componentDidMount');
+                    console.log(response.data);
+                    const ingredients={
+                        salad:response.data[0].salad,
+                        bacon:response.data[0].bacon,
+                        cheese:response.data[0].cheese,
+                        meat:response.data[0].meat
+                    };
+                    this.props.onSetIngredients(ingredients);
+                });
+        }
     }
 
     purchaseHandler = () => {
@@ -90,7 +117,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps= (state) => {
     return {
         ings: state.ingredients,
-        totalPrice:state.totalPrice
+        totalPrice:state.totalPrice,
+        orders:state.orders
     };
 };
 

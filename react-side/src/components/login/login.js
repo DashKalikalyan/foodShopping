@@ -24,9 +24,9 @@ class Login extends Component {
 
                 console.log(response);
                 this.props.onSaveToken(response.data.tokens[0].token);
-                // this.props.history.push({
-                //     pathname:'/'
-                // });
+                this.props.history.push({
+                    pathname:'/'
+                });
 
             });
     };

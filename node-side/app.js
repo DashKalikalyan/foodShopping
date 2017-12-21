@@ -9,6 +9,7 @@ const {authenticate}=require('./middlewares/authenticate');
 const {addOrder}=require('./routes/addOrder');
 const {deleteOrder}=require('./routes/deleteOrder');
 const {updateOrder}=require('./routes/updateOrder');
+const {getIngredients}=require('./routes/getIngredients');
 
 
 const app=express();
@@ -33,6 +34,7 @@ app.get('/orders',authenticate,getOrders);
 app.get('/order-details/:id',authenticate,getOrderDetails);
 app.delete('/order/:id',authenticate,deleteOrder);
 app.put('/order/:id',authenticate,updateOrder);
+app.get('/ingredients',getIngredients);
 app.post('/login',login);
 app.post('/signup',signup);
 

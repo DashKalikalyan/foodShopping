@@ -10,12 +10,13 @@ class OrderDetails extends Component {
     };
 
     componentDidMount() {
+        console.log('in order-details');
         console.log(this.props.match.params.id);
-        console.log('https://burger-bf2a6.firebaseio.com/orders/'+this.props.match.params.id+'.json');
-        axios.get('https://burger-bf2a6.firebaseio.com/orders/'+this.props.match.params.id+'.json')
+        axios.get('http://localhost:3001/order-details/'+this.props.match.params.id,{
+            headers:{'x-auth': this.props.token}})
             .then((response)=>{
                 console.log(response.data);
-                let order={...response.data, id:this.props.match.params.id};
+                let order={...response.data};
                 this.setState({order:order});
                 console.log(order);
             });
@@ -74,8 +75,11 @@ class OrderDetails extends Component {
         }
 }
 
+const mapStateToProps= (state) => {
+    return {
+        orders:state.orders,
+        token:state.token
+    };
+};
 
-
-
-
-export default  OrderDetails;
+export default  connect(mapStateToProps)(OrderDetails);

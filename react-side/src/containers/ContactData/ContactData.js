@@ -28,7 +28,7 @@ class ContactData extends Component {
 
         console.log(post);
 
-        axios.post('https://burger-bf2a6.firebaseio.com/orders.json', post)
+        axios.post('http://localhost:3001/order/', post, {headers:{'x-auth': this.props.token}})
             .then((response) => {
                 console.log(response);
                 // let order={...post, orderId: response.data.name};
@@ -167,7 +167,8 @@ class ContactData extends Component {
 const mapStateToProps= (state) => {
     return {
         ings: state.ingredients,
-        totalPrice:state.totalPrice
+        totalPrice:state.totalPrice,
+        token:state.token
     }
 };
 
