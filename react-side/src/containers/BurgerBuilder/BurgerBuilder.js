@@ -16,7 +16,8 @@ class BurgerBuilder extends Component {
         //     meat:0
         // },
         // purchasable:false,
-        purchasing:false
+        purchasing:false,
+        updatingOrder:false
     };
 
     componentDidMount() {
@@ -36,6 +37,7 @@ class BurgerBuilder extends Component {
                 }
             }
             this.props.onSetIngredients(ingredients);
+            this.setState({updatingOrder:true});
 
         } else {
             console.log(this.props.match);
@@ -63,9 +65,15 @@ class BurgerBuilder extends Component {
     };
 
     purchaseContinueHandler = () => {
-        this.props.history.push({
-            pathname:'/checkout'
-        });
+        if(this.props.match.params.id) {
+            this.props.history.push({
+                pathname:'/checkout/'+this.props.match.params.id
+            });
+        } else{
+            this.props.history.push({
+                pathname:'/checkout'
+            });
+        }
     };
 
     updatePurchaseState = (ingredients) => {
@@ -103,6 +111,8 @@ class BurgerBuilder extends Component {
                         totalPrice={this.props.totalPrice}/>
                 </Modal>
                 <BuildControls
+
+                    updatingOrder={this.state.updatingOrder}
                     ingredientAdded={this.props.onIngredientAdded}
                     ingredientRemoved={this.props.onIngredientRemoved}
                     disabled={disabledInfo}

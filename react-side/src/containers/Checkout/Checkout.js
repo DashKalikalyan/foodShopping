@@ -14,16 +14,23 @@ class Checkout extends Component {
     // };
 
 
+
+
     checkoutCancelled= () => {
         this.props.history.push('/');
         // this.props.history.goBack();
     };
 
     checkoutContinued= () => {
-        this.props.history.push({
-            pathname:'/contact-data'
-        });
-
+        if(this.props.match.params.id){
+            this.props.history.push({
+                pathname:'/contact-data/'+this.props.match.params.id
+            });
+        } else {
+            this.props.history.push({
+                pathname:'/contact-data'
+            });
+        }
     };
 
     render() {

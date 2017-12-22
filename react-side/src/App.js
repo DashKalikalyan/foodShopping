@@ -19,8 +19,10 @@ class App extends Component {
                         <Switch>
                             <Route path="/order-details/:id" component={OrderDetails}/>
                             <Route path="/order/:id/edit" component={BurgerBuilder}/>
+                            <Route path="/checkout/:id" component={Checkout}/>
                             <Route path="/checkout" component={Checkout}/>
                             <Route path="/orders" component={Orders}/>
+                            <Route path="/contact-data/:id" component={ContactData}/>
                             <Route path="/contact-data" component={ContactData}/>
                             <Route path="/signup" component={Signup}/>
                             <Route path="/login" component={Login}/>

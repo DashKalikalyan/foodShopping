@@ -10,10 +10,21 @@ class ContactData extends Component {
             street:'',
             zipCode:'',
             country:'',
-            email:'kkd@gmail.com',
+            email:'',
             deliveryMethod:'fastest'
         }
     };
+
+    componentDidMount() {
+        if (this.props.match.params.id) {
+            let i;
+            for (i in this.props.orders){
+                if (this.props.orders[i]._id===this.props.match.params.id){
+                    this.setState({orderForm:this.props.orders[i].orderData});
+                }
+            }
+        }
+    }
 
     orderHandler = (event) => {
         console.log('You continue!!');
@@ -27,17 +38,24 @@ class ContactData extends Component {
         };
 
         console.log(post);
-
-        axios.post('http://localhost:3001/order/', post, {headers:{'x-auth': this.props.token}})
-            .then((response) => {
-                console.log(response);
-                // let order={...post, orderId: response.data.name};
-                // this.props.onSaveOrder(order);
-                this.props.history.push({
-                    pathname:'/'
+        if(this.props.match.params.id){
+            console.log(this.props.token);
+            axios.put('http://localhost:3001/order/'+this.props.match.params.id,post,{headers:{'x-auth': this.props.token}})
+                .then((response)=>{
+                    console.log(response);
                 });
+        } else {
+            axios.post('http://localhost:3001/order/', post, {headers:{'x-auth': this.props.token}})
+                .then((response) => {
+                    console.log(response);
+                    // let order={...post, orderId: response.data.name};
+                    // this.props.onSaveOrder(order);
+                    this.props.history.push({
+                        pathname:'/'
+                    });
 
-            });
+                });
+        }
     };
 
     onInputChanged = (event) => {
@@ -168,7 +186,8 @@ const mapStateToProps= (state) => {
     return {
         ings: state.ingredients,
         totalPrice:state.totalPrice,
-        token:state.token
+        token:state.token,
+        orders:state.orders
     }
 };
 

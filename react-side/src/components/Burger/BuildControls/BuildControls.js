@@ -10,8 +10,14 @@ const controls = [
     {label : 'Meat', type : 'meat'}
 ];
 
-const buildControls = (props) => (
+const buildControls = (props) => {
+    let updateOrOrder;
+    if (props.updatingOrder) {
+        updateOrOrder=(<button className={classes.OrderButton} disabled={!props.purchasable} onClick={props.purchaseHandler}>UPDATE</button>);
+    } else {updateOrOrder=(<button className={classes.OrderButton} disabled={!props.purchasable} onClick={props.purchaseHandler}>ORDER NOW</button>);
 
+    }
+    return(
         <div className={classes.BuildControls}>
             <p><strong>${props.price.toFixed(2)}</strong></p>
             {controls.map(control => (
@@ -24,9 +30,9 @@ const buildControls = (props) => (
                     added={props.ingredientAdded.bind(this,control.type)}
                     removed={props.ingredientRemoved.bind(this,control.type)}/>
             ))}
-            <button className={classes.OrderButton} disabled={!props.purchasable} onClick={props.purchaseHandler}>ORDER NOW</button>
+            {updateOrOrder}
         </div>
-);
+)};
 
 
 export default buildControls;
