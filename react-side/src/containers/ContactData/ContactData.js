@@ -12,7 +12,8 @@ class ContactData extends Component {
             country:'',
             email:'',
             deliveryMethod:'fastest'
-        }
+        },
+        updateMode:false
     };
 
     componentDidMount() {
@@ -23,6 +24,7 @@ class ContactData extends Component {
                     this.setState({orderForm:this.props.orders[i].orderData});
                 }
             }
+            this.setState({updateMode:true});
         }
     }
 
@@ -34,7 +36,9 @@ class ContactData extends Component {
         const post = {
             ingredients: this.props.ings,
             price: this.props.totalPrice,
-            orderData: this.state.orderForm
+            orderData: this.state.orderForm,
+            isDelivered:false,
+            isDispatched:false
         };
 
         console.log(post);
@@ -73,6 +77,12 @@ class ContactData extends Component {
     };
 
     render() {
+        let orderOrUpdate;
+        if(this.state.updateMode) {
+            orderOrUpdate="Update"
+        } else {
+            orderOrUpdate="Order"
+        }
 
         return (
             <div>
@@ -174,9 +184,8 @@ class ContactData extends Component {
                     </div>
                 </div>
                 <div style={{paddingLeft:'10px'}}>
-                    <button className="btn btn-primary" onClick={this.orderHandler}>Order Now</button>
+                    <button className="btn btn-primary" onClick={this.orderHandler}>{orderOrUpdate}</button>
                 </div>
-                <p>{this.props.orderId}</p>
             </div>
         );
     }

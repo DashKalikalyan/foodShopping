@@ -9,7 +9,9 @@ const initialState= {
     },
     totalPrice: 4,
     orders:[],
-    token:''
+    token:'',
+    isDispatched:true,
+    isDelivered:false
 };
 
 const INGREDIENT_PRICE = {

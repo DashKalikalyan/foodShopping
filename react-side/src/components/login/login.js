@@ -12,6 +12,14 @@ class Login extends Component {
         }
     };
 
+    componentWillMount() {
+        if(this.props.token){
+            this.props.history.push({
+                pathname:'/'
+            });
+        }
+    }
+
     LoginHandler= (event) => {
         console.log('You login!!');
         const loginInfo={...this.state.orderForm};
@@ -21,7 +29,6 @@ class Login extends Component {
         axios.post('http://localhost:3001/login', loginInfo)
             .then((response) => {
                 console.log(response.data.tokens[0].token);
-
                 console.log(response);
                 this.props.onSaveToken(response.data.tokens[0].token);
                 this.props.history.push({
@@ -95,7 +102,8 @@ class Login extends Component {
 const mapStateToProps= (state) => {
     return {
         ings: state.ingredients,
-        totalPrice:state.totalPrice
+        totalPrice:state.totalPrice,
+        token:state.token
     }
 };
 

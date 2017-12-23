@@ -51,6 +51,18 @@ const OrderSchema=new Schema({
             type:Number
         }
     },
+    isDispatched:{
+        type:Boolean,
+        required:true
+    },
+    isDelivered:{
+        type:Boolean,
+        required:true
+    },
+    price:{
+        type:Number,
+        required:true
+    },
     _creator: {
         required: true,
         type: mongoose.Schema.Types.ObjectId,

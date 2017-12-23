@@ -70,6 +70,8 @@ class Orders extends Component {
                                 orderData={order.orderData}
                                 price={order.price}
                                 key={order._id}
+                                isDispatched={order.isDispatched}
+                                isDelivered={order.isDelivered}
                                 onDelete={this.onDelete.bind(this,order._id)}
                                 onViewOrder={this.onViewOrder.bind(this,order._id)}
                                 onUpdateOrder={this.onUpdateOrder.bind(this,order._id)}/>

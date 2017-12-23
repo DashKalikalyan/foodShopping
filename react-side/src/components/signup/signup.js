@@ -15,6 +15,14 @@ class Signup extends Component {
         }
     };
 
+    componentWillMount() {
+        if(this.props.token){
+            this.props.history.push({
+                pathname:'/'
+            });
+        }
+    }
+
      signupHandler= (event) => {
         console.log('You signup!!');
         const profileInfo={...this.state.orderForm};
@@ -144,7 +152,8 @@ class Signup extends Component {
 const mapStateToProps= (state) => {
     return {
         ings: state.ingredients,
-        totalPrice:state.totalPrice
+        totalPrice:state.totalPrice,
+        token:state.token
     }
 };
 

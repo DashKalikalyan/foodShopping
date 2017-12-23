@@ -18,6 +18,9 @@ const addOrder=(req,res) => {
             cheese:req.body.ingredients.cheese,
             meat:req.body.ingredients.meat
         },
+        isDelivered:req.body.isDelivered,
+        isDispatched:req.body.isDispatched,
+        price:req.body.price,
         _creator: req.user._id
     });
     order.save().then((doc) => {

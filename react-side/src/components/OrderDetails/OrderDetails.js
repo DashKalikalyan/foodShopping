@@ -50,7 +50,7 @@ class OrderDetails extends Component {
                     <p style={{textDecoration:'none'}}>Price: <strong>{this.state.order.price}</strong></p>
                     <div className="row">
                         <div className="col-lg-6">
-                            <h1 style={{textDecoration:'none'}}>Your Order No: {this.state.order.id}</h1>
+                            <h1 style={{textDecoration:'none'}}>Your Order No: {this.state.order._id}</h1>
                             <h1>Deliver to</h1>
 
                             <h3 style={{textDecoration:'none'}}>NAME- {this.state.order.orderData.name}</h3>
