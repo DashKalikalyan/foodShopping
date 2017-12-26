@@ -35,7 +35,21 @@ const OrderSchema=new Schema({
         deliveryMethod:{
             type: String,
             required: true
-        }
+        },
+        phoneNumber:{
+            type:String,
+            required:true,
+            minlength:1,
+            maxlength:12
+        },
+        city:{
+            type:String,
+            required:true,
+        },
+        state:{
+            type:String,
+            required:true
+        },
     },
     ingredients:{
         salad:{

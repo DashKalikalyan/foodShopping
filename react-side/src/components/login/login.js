@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import * as actionCreators from "../../store/actions";
 
 
@@ -20,6 +21,11 @@ class Login extends Component {
         }
     }
 
+    componentDidMount(){
+        console.log(this.props.match);
+    }
+
+
     LoginHandler= (event) => {
         console.log('You login!!');
         const loginInfo={...this.state.orderForm};
@@ -31,9 +37,15 @@ class Login extends Component {
                 console.log(response.data.tokens[0].token);
                 console.log(response);
                 this.props.onSaveToken(response.data.tokens[0].token);
-                this.props.history.push({
-                    pathname:'/'
-                });
+                if(this.props.ings.meat+this.props.ings.cheese+this.props.ings.bacon+this.props.ings.salad){
+                    this.props.history.push({
+                        pathname:'/contact-data'
+                    })
+                } else{
+                    this.props.history.push({
+                        pathname:'/'
+                    });
+                }
 
             });
     };
@@ -93,7 +105,10 @@ class Login extends Component {
                 <div style={{paddingLeft:'10px'}}>
                     <button className="btn btn-primary" onClick={this.LoginHandler}>LOG IN</button>
                 </div>
-                <p>{this.props.orderId}</p>
+                <br/>
+                <div>
+                    <p>Don't have an account yet?<span><Link to="/signup">Signup</Link></span></p>
+                </div>
             </div>
         );
     }

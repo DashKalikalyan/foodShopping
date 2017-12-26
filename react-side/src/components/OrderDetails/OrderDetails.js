@@ -59,6 +59,9 @@ class OrderDetails extends Component {
                             <h4 style={{textDecoration:'none'}}>Country- {this.state.order.orderData.country}</h4>
                             <h4 style={{textDecoration:'none'}}>Delivery- {this.state.order.orderData.deliveryMethod}</h4>
                             <h4 style={{textDecoration:'none'}}>Email- {this.state.order.orderData.email}</h4>
+                            <h4 style={{textDecoration:'none'}}>Phone Number- {this.state.order.orderData.phoneNumber}</h4>
+                            <h4 style={{textDecoration:'none'}}>City- {this.state.order.orderData.city}</h4>
+                            <h4 style={{textDecoration:'none'}}>State- {this.state.order.orderData.state}</h4>
                         </div>
                         <div className="col-lg-6">
                             <Burger

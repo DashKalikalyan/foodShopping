@@ -92,16 +92,16 @@ UserSchema.methods.generateAuthToken = function () {
     // return token;
 };
 
-// UserSchema.methods.removeToken = function (token) {
-//     const user =this;
-//     return user.update({
-//         $pull: {
-//             tokens: {
-//                 token: token
-//             }
-//         }
-//     });
-// };
+UserSchema.methods.removeToken = function (token) {
+    const user =this;
+    return user.update({
+        $pull: {
+            tokens: {
+                token: token
+            }
+        }
+    });
+};
 
 const User = mongoose.model('User', UserSchema);
 

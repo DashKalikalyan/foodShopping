@@ -10,7 +10,7 @@ const initialState= {
     totalPrice: 4,
     orders:[],
     token:'',
-    isDispatched:true,
+    isDispatched:false,
     isDelivered:false
 };
 
@@ -68,6 +68,11 @@ const reducer= (state=initialState, action) => {
             return {
                 ...state,
                 token:action.token
+            };
+        case actiontypes.DELETE_TOKEN:
+            return {
+                ...state,
+                token:''
             };
         default:
             return state;

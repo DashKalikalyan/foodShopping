@@ -10,7 +10,10 @@ class ContactData extends Component {
             street:'',
             zipCode:'',
             country:'',
+            phoneNumber:'',
             email:'',
+            city:'',
+            state:'',
             deliveryMethod:'fastest'
         },
         updateMode:false
@@ -29,6 +32,7 @@ class ContactData extends Component {
     }
 
     orderHandler = (event) => {
+        event.preventDefault();
         console.log('You continue!!');
         const formdata={...this.state.orderForm};
         console.log(this.state.orderForm);
@@ -89,8 +93,7 @@ class ContactData extends Component {
                 <div style={{paddingLeft:'10px'}}><h4>Enter your Contact Details</h4></div>
                 <div className="row">
                     <div className="col-xs-12 col-sm-10 col-md-8 col-lg-6 ">
-                        <form className="col-md-8" >
-
+                        <form className="col-md-8" onSubmit={this.orderHandler}>
                             <div className="form-group">
                                 <label htmlFor="name">Name</label>
                                 <input
@@ -124,17 +127,96 @@ class ContactData extends Component {
                             <div className="form-group">
                                 <label htmlFor="zipCode">Zip Code</label>
                                 <input
-                                    type="number"
+                                    type="text"
+                                    pattern="(\d{5}([\-]\d{4})?)"
                                     id="zipCode"
                                     name="zipCode"
                                     className="form-control"
-                                    placeholder="Zip Code"
+                                    placeholder="Zip Code in XXXXX or XXXXX-XXXX"
                                     required
                                     value={this.state.orderForm.zipCode}
                                     onChange={this.onInputChanged}/>
                             </div>
 
                             <br/>
+
+                            <div className="form-group">
+                                <label htmlFor="city">City</label>
+                                <input
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    className="form-control"
+                                    placeholder="City"
+                                    required
+                                    value={this.state.orderForm.city}
+                                    onChange={this.onInputChanged}/>
+                            </div>
+
+                            <br/>
+
+                            <div className="form-group">
+                                <label htmlFor="state">State</label>
+                                <select
+                                    className="form-control"
+                                    id="state"
+                                    required
+                                    name="state"
+                                    value={this.state.orderForm.state}
+                                    onChange={this.onInputChanged}>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="DC">District Of Columbia</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming</option>
+                                </select>
+                            </div>
 
                             <div className="form-group">
                                 <label htmlFor="country">Country</label>
@@ -148,6 +230,25 @@ class ContactData extends Component {
                                     value={this.state.orderForm.country}
                                     onChange={this.onInputChanged}/>
                             </div>
+
+                            <br/>
+
+                            <div className="form-group">
+                                <label htmlFor="phoneNumber">phoneNumber</label>
+                                <input
+                                    type="tel"
+                                    id="phoneNumber"
+                                    name="phoneNumber"
+                                    className="form-control"
+                                    pattern="\d{3}[\-]\d{3}[\-]\d{4}"
+                                    size="13"
+                                    placeholder="Phone Number in XXX-XXX-XXXX format"
+                                    required
+                                    value={this.state.orderForm.phoneNumber}
+                                    onChange={this.onInputChanged}/>
+                            </div>
+
+                            <br/>
 
                             <div className="form-group">
                                 <label htmlFor="email">email</label>
@@ -179,13 +280,13 @@ class ContactData extends Component {
                                       <option value="slow">not in a hurry</option>
                                 </select>
                             </div>
-
+                            <div style={{paddingLeft:'10px'}}>
+                                <button className="btn btn-primary" type="submit">{orderOrUpdate}</button>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div style={{paddingLeft:'10px'}}>
-                    <button className="btn btn-primary" onClick={this.orderHandler}>{orderOrUpdate}</button>
-                </div>
+
             </div>
         );
     }

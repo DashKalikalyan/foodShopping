@@ -4,7 +4,7 @@ export const SET_INGREDIENTS = 'SET_INGREDIENTS';
 // export const SET_CONTACTDATA= 'SET_CONTACTDATA';
 export const GET_ORDERS= 'GET_ORDERS';
 export const SAVE_TOKEN= 'SAVE_TOKEN';
-export const IS_ADMIN= 'IS_ADMIN';
+export const DELETE_TOKEN='DELETE_TOKEN';
 
 export const addIngredient= (ingredientName)=> {
     return {
@@ -47,3 +47,8 @@ export const saveToken= (token) => {
     };
 };
 
+export const deleteToken= () => {
+    return {
+        type:DELETE_TOKEN
+    };
+};

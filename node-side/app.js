@@ -10,6 +10,7 @@ const {addOrder}=require('./routes/addOrder');
 const {deleteOrder}=require('./routes/deleteOrder');
 const {updateOrder}=require('./routes/updateOrder');
 const {getIngredients}=require('./routes/getIngredients');
+const {logout}=require('./routes/logout');
 
 
 const app=express();
@@ -35,6 +36,7 @@ app.get('/order-details/:id',authenticate,getOrderDetails);
 app.delete('/order/:id',authenticate,deleteOrder);
 app.put('/order/:id',authenticate,updateOrder);
 app.get('/ingredients',getIngredients);
+app.delete('/logout',authenticate,logout);
 app.post('/login',login);
 app.post('/signup',signup);
 

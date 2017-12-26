@@ -18,8 +18,8 @@ class Orders extends Component {
                 console.log(response.data);
                 let orders=[];
                 for(let i in response.data) {
-                    console.log({...response.data[i], id:i});
-                    orders.push({...response.data[i], id:i});
+                    console.log({...response.data[i]});
+                    orders.push({...response.data[i]});
                 }
                 console.log(orders);
                 this.props.getOrders(orders);
@@ -37,8 +37,8 @@ class Orders extends Component {
                         console.log(response.data);
                         let orders=[];
                         for(let i in response.data) {
-                            console.log({...response.data[i], id:i});
-                            orders.push({...response.data[i], id:i});
+                            console.log({...response.data[i]});
+                            orders.push({...response.data[i]});
                         }
                         console.log(orders);
                         this.props.getOrders(orders);

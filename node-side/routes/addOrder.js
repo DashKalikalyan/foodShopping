@@ -10,7 +10,10 @@ const addOrder=(req,res) => {
             zipCode:req.body.orderData.zipCode,
             country:req.body.orderData.country,
             email:req.body.orderData.email,
-            deliveryMethod:req.body.orderData.deliveryMethod
+            deliveryMethod:req.body.orderData.deliveryMethod,
+            phoneNumber:req.body.orderData.phoneNumber,
+            city:req.body.orderData.city,
+            state:req.body.orderData.state
         },
         ingredients:{
             salad:req.body.ingredients.salad,

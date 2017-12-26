@@ -22,14 +22,20 @@ class Checkout extends Component {
     };
 
     checkoutContinued= () => {
-        if(this.props.match.params.id){
+        if(!this.props.token){
             this.props.history.push({
-                pathname:'/contact-data/'+this.props.match.params.id
+                pathname:'/login'
             });
         } else {
-            this.props.history.push({
-                pathname:'/contact-data'
-            });
+            if(this.props.match.params.id){
+                this.props.history.push({
+                    pathname:'/contact-data/'+this.props.match.params.id
+                });
+            } else {
+                this.props.history.push({
+                    pathname:'/contact-data'
+                });
+            }
         }
     };
 
@@ -48,7 +54,8 @@ class Checkout extends Component {
 const mapStateToProps= (state) => {
     return {
         ings: state.ingredients,
-        totalPrice:state.totalPrice
+        totalPrice:state.totalPrice,
+        token:state.token
     }
 };
 
